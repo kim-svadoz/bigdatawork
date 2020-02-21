@@ -10,7 +10,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-//Mapper
+//Mapper - "데이터를 분류하는 역할"
 //1. Mapper클래스를 상속한다.
 //	=> mapper에 전달될 input데이터의 key,value타입과 mapper에 실행결과로 출력되는 output데이터의 key,value타입을 정의
 //2. map메소드를 오버라이딩해서 map작업을 수행하면서 처리할 내용을 구현
@@ -33,7 +33,7 @@ public class WordCountMapper
 			throws IOException, InterruptedException {
 		//key는 linenumber(ex. 1), value는 문장 입력데이터의 한 라인에 해당하는 문장(ex. read a book)
 		StringTokenizer st = new StringTokenizer(value.toString());
-		while(st.hasMoreTokens()) { //token : read , a, book 이것들이 존재하면 계속 돌리겟다.
+		while(st.hasMoreTokens()) { //token : read , a, book 이것들이 존재하면 계속 돌리겟다. 분린된게 token
 			String token = st.nextToken();
 			outputKey.set(token); //output데이터의 키를 셋팅
 			//Context객체의 write메소드를 통해서 output으로 내보낼 데이터의 key와 value를 정의
