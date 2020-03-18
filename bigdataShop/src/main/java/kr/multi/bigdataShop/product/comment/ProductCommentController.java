@@ -23,7 +23,21 @@ public class ProductCommentController {
 		service.productcommentinsert(dto);
 		return "redirect:/product/read.do?prd_no="+dto.getPrd_no();
 	}
-
+	
+	@RequestMapping(value="/comment/result.do")
+	public ModelAndView commentresult(String year, String month) {
+		ModelAndView mav = new ModelAndView();
+		List<ProductCommentResultDTO> dto = null;
+		if(year==null||month!=null) {
+			dto = service.commentResult();
+		} else {
+			dto = service.commentResult(year,month);
+		}
+		System.out.println(dto);
+		mav.addObject("commentresult", dto);
+		mav.setViewName("comment/result");
+		return mav;
+	}
 }
 
 

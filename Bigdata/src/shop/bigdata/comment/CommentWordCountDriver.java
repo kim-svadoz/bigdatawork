@@ -15,8 +15,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 public class CommentWordCountDriver {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
-		Job job = new Job(conf, "mywordcount");
-		
+		Job job = new Job(conf, "comment");
 		job.setMapperClass(CommentWordCountMapper.class);
 		job.setReducerClass(CommentWordCountReducer.class);
 		job.setJarByClass(CommentWordCountDriver.class);

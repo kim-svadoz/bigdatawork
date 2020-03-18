@@ -8,23 +8,16 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 public class CommentWordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
 	IntWritable resultVal = new IntWritable();
-	Text appenddata = new Text();
-	String data = "";
-	Text resultKey = new Text();
 	
 	@Override
 	protected void reduce(Text key, Iterable<IntWritable> values,
 			Reducer<Text, IntWritable, Text, IntWritable>.Context context) throws IOException, InterruptedException {
 		int sum = 0;
-		data = data + "reduce호출";
-		appenddata.set(data);
 		for (IntWritable value:values) {
 			sum += value.get();
 		}
 		resultVal.set(sum);
-		resultKey.set(key+":"+appenddata);
-		
-		context.write(resultKey, resultVal);
+		context.write(key, resultVal);
 	}
 	
 }

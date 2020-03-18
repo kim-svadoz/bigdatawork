@@ -20,7 +20,14 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 		return dao.productcommentinsert(dto);
 	}
 	
+	public List<ProductCommentResultDTO> commentResult(String year, String month){
+		return dao.commentResult(year, month);
+	}
 
+	@Override
+	public List<ProductCommentResultDTO> commentResult() {
+		return dao.commentResult();
+	}
 }
 
 

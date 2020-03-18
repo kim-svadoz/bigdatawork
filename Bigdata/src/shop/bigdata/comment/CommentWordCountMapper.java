@@ -2,6 +2,8 @@ package shop.bigdata.comment;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.transform.OutputKeys;
 
@@ -18,10 +20,16 @@ public class CommentWordCountMapper
 	protected void map(LongWritable key, Text value,
 			Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 			throws IOException, InterruptedException {
-		StringTokenizer st = new StringTokenizer(value.toString(), ",");
-		while(st.hasMoreTokens()) { //token : read , a, book 이것들이 존재하면 계속 돌리겟다. 분린된게 token
-			String token = st.nextToken();
-			outputKey.set(token); //output데이터의 키를 셋팅
+		
+		String line[] = value.toString().split(",");
+		String str = line[2];
+		String year = line[3].substring(0,2);
+		String month = line[3].substring(5,7);
+		String patternStr = "[a-z0-9가-힣]+[^은는이가에 ]";
+		Pattern pattern = Pattern.compile(patternStr);
+		Matcher m = pattern.matcher(str);
+		while(m.find()) {
+			outputKey.set(year+"\t"+month+"\t"+m.group());
 			context.write(outputKey, outputVal);
 		}
 	}

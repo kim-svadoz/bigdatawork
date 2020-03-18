@@ -11,6 +11,8 @@
 			alias="board"/>
 		<typeAlias type="kr.multi.bigdataShop.product.comment.ProductCommentDTO"
 			alias="productcomment"/>
+			<typeAlias type="kr.multi.bigdataShop.product.comment.ProductCommentResultDTO"
+			alias="productcommentresult"/>
 		<!-- <typeAlias type="kr.multi.bigdataShop.member.MemberDTO" 
 		alias="member"/>
 		<typeAlias type="kr.multi.bigdataShop.member.login.LoginDTO" 

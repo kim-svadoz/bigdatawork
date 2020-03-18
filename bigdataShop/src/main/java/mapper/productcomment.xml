@@ -12,4 +12,27 @@
 	<insert id="commentinsert" parameterType="productcomment">
 		insert into pro_comment	values (#{prd_no}, #{mem_id}, #{pro_comment}, sysdate)
 	</insert>
+	<!-- <select id="comresult" resultType="productcommentresult" parameterType="Map">
+		select *
+		from (select word, count from comment_result where year=#{year} and month=#{month} order by count desc)
+		<![CDATA[
+		where ROWNUM<=10
+		]]>
+	</select> -->
+	<select id="result" resultType="productcommentresult">
+		select *
+		from (select word, count from comment_result order by count desc)
+		<![CDATA[
+		where ROWNUM<=10
+		]]>
+	</select>
+	
+	<select id="comresult" resultType="productcommentresult" parameterType="Map">
+		select *
+		from (select word, count from comment_result where year=#{year} and month=#{month} order by count desc)
+		<![CDATA[
+		where ROWNUM<=10
+		]]>
+	</select>
+	
 </mapper>
